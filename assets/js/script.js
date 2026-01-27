@@ -18,7 +18,7 @@ if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
 themeToggle.addEventListener('click', () => {
     const currentTheme = htmlElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
+
     htmlElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateIcon(newTheme === 'dark');
@@ -26,8 +26,7 @@ themeToggle.addEventListener('click', () => {
 
 function updateIcon(isDark) {
     // Assuming we use FontAwesome or similar, or just text for now
-    // Simple text replacement for MVP if no icon font loaded yet
-    themeToggle.textContent = isDark ? '☀️' : '🌙'; 
+    themeToggle.textContent = isDark ? '☀️' : '🌙';
 }
 
 // Active Navigation Highlight
@@ -36,7 +35,7 @@ const navLinks = document.querySelectorAll('.nav-links a');
 
 window.addEventListener('scroll', () => {
     let current = '';
-    
+
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
@@ -50,5 +49,18 @@ window.addEventListener('scroll', () => {
         if (link.getAttribute('href').includes(current)) {
             link.classList.add('active');
         }
+    });
+});
+
+// Research Cards Expansion Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.card');
+    console.log("Research cards found:", cards.length);
+
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            console.log("Card clicked");
+            card.classList.toggle('expanded');
+        });
     });
 });

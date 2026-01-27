@@ -1,21 +1,28 @@
 /* Modern Academic Theme - Option B */
 :root {
     /* Color Palette - Light Mode (Default) */
-    --bg-color: #f8fafc;        /* Slate-50 */
-    --card-bg: #ffffff;         /* White */
-    --text-primary: #1e293b;    /* Slate-800 */
-    --text-secondary: #475569;  /* Slate-600 */
-    --accent-color: #3b82f6;    /* Blue-500 - A vibrant but professional academic blue */
-    --accent-hover: #2563eb;    /* Blue-600 */
-    --border-color: #e2e8f0;    /* Slate-200 */
-    
+    --bg-color: #f8fafc;
+    /* Slate-50 */
+    --card-bg: #ffffff;
+    /* White */
+    --text-primary: #1e293b;
+    /* Slate-800 */
+    --text-secondary: #475569;
+    /* Slate-600 */
+    --accent-color: #3b82f6;
+    /* Blue-500 - A vibrant but professional academic blue */
+    --accent-hover: #2563eb;
+    /* Blue-600 */
+    --border-color: #e2e8f0;
+    /* Slate-200 */
+
     /* Spacing & Layout */
     --container-width: 900px;
     --header-height: 70px;
     --radius-md: 8px;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-    
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
     /* Typography */
     --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
     --font-body: 'Inter', system-ui, -apple-system, sans-serif;
@@ -24,15 +31,22 @@
 
 [data-theme="dark"] {
     /* Color Palette - Dark Mode */
-    --bg-color: #0f172a;        /* Slate-900 */
-    --card-bg: #1e293b;         /* Slate-800 */
-    --text-primary: #f1f5f9;    /* Slate-100 */
-    --text-secondary: #94a3b8;  /* Slate-400 */
-    --accent-color: #60a5fa;    /* Blue-400 */
-    --accent-hover: #93c5fd;    /* Blue-300 */
-    --border-color: #334155;    /* Slate-700 */
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.5);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.5);
+    --bg-color: #0f172a;
+    /* Slate-900 */
+    --card-bg: #1e293b;
+    /* Slate-800 */
+    --text-primary: #f1f5f9;
+    /* Slate-100 */
+    --text-secondary: #94a3b8;
+    /* Slate-400 */
+    --accent-color: #60a5fa;
+    /* Blue-400 */
+    --accent-hover: #93c5fd;
+    /* Blue-300 */
+    --border-color: #334155;
+    /* Slate-700 */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
 }
 
 /* Base Reset */
@@ -187,6 +201,7 @@ section:last-child {
     margin-bottom: 10px;
     background: linear-gradient(to right, var(--text-primary), var(--accent-color));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -211,7 +226,8 @@ section:last-child {
     border: 4px solid var(--card-bg);
     box-shadow: var(--shadow-md);
     flex-shrink: 0;
-    background-color: var(--border-color); /* Placeholder color */
+    background-color: var(--border-color);
+    /* Placeholder color */
 }
 
 .hero-image img {
@@ -249,6 +265,13 @@ section:last-child {
 }
 
 /* Research Cards */
+.section-intro {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    max-width: 800px;
+}
+
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -262,21 +285,70 @@ section:last-child {
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border-color);
     transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    overflow: hidden;
+    /* Important for expansion animation */
 }
 
 .card:hover {
-    transform: translateY(-5px);
     box-shadow: var(--shadow-md);
 }
 
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .card h3 {
-    margin-bottom: 10px;
+    margin: 0;
     font-size: 1.25rem;
 }
+
+.toggle-icon {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--accent-color);
+    transition: transform 0.3s ease;
+}
+
+.card.expanded .toggle-icon {
+    transform: rotate(45deg);
+    /* Turns + into x */
+}
+
+.card-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease;
+    opacity: 0;
+    margin-top: 0;
+}
+
+.card.expanded .card-body {
+    max-height: 500px;
+    /* Arbitrary large enough height */
+    opacity: 1;
+    margin-top: 15px;
+}
+
 
 .card p {
     color: var(--text-secondary);
     font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+.card ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.card li {
+    margin-bottom: 5px;
 }
 
 /* Publication List */
@@ -318,7 +390,7 @@ section:last-child {
     border-collapse: collapse;
 }
 
-.teaching-table th, 
+.teaching-table th,
 .teaching-table td {
     text-align: left;
     padding: 12px;
@@ -354,16 +426,17 @@ footer {
     }
 
     .nav-links {
-        display: none; /* Simplification: Mobile menu would require JS toggle or different design. For now hidden on small screens? Better: just wrap */
+        display: none;
+        /* Simplification: Mobile menu would require JS toggle or different design. For now hidden on small screens? Better: just wrap */
     }
-    
+
     /* Simple mobile nav fix for MVP: scrollable or stacked */
     nav {
         flex-direction: column;
         padding: 10px;
         gap: 10px;
     }
-    
+
     .nav-links {
         display: flex;
         gap: 10px;
